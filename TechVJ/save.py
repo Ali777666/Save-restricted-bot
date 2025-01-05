@@ -65,7 +65,7 @@ def progress(current, total, message, type):
 # start command
 @Client.on_message(filters.command(["start"]))
 async def send_start(client: Client, message: Message):
-   await client.send_message(message.chat.id, f"<b>👋 Hi {message.from_user.mention}, I am Save Restricted Content Bot, I can send you restricted content by its post link.\n\nFor downloading restricted content /login first.\n\nKnow how to use bot by - /help</b>", reply_markup=reply_markup, reply_to_message_id=message.id)
+    await client.send_message(message.chat.id, f"<b>👋 Hi {message.from_user.mention}, I am Save Restricted Content Bot, I can send you restricted content by its post link.\n\nFor downloading restricted content, send me the link of the post you want to save.</b>")
     return
 
 
