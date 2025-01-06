@@ -73,6 +73,16 @@ async def send_start(client: Client, message: Message):
 @Client.on_message(filters.command(["help"]))
 async def send_help(client: Client, message: Message):
     await client.send_message(message.chat.id, f"{HELP_TXT}")
+# cancel command
+@Client.on_message(filters.command(["cancel"]))
+async def cancel_command(client: Client, message: Message):
+    task = user_tasks.get(message.chat.id)
+    if task:
+        task.cancel()
+        del user_tasks[message.chat.id]
+        await client.send_message(message.chat.id, "Your task has been cancelled.", reply_to_message_id=message.id)
+    else:
+        await client.send_message(message.chat.id, "There is no ongoing task to cancel.", reply_to_message_id=message.id)
 
 @Client.on_message(filters.text & filters.private)
 async def save(client: Client, message: Message):
